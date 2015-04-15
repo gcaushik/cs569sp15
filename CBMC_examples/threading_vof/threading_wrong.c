@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <assert.h>
+#include <unistd.h>
  
 // Let us create a global variable to change it in threads
 int g = 0;
@@ -32,12 +33,12 @@ int threadCount(int num_threads)
     // Let us create threads
     for (i = 0; i < num_threads; i++)
         pthread_create(&threads[i], &attr, myThreadFun, (void *)i);
-    
+
     pthread_attr_destroy(&attr);
 
     for (i = 0; i < num_threads; i++)
-    	pthread_join(threads[i],NULL);
-
+        pthread_join(threads[i],NULL);
+    
     // printf("Global: %d\n", g);
     // assert (g == num_threads);
     pthread_mutex_destroy(&mutexsum);
